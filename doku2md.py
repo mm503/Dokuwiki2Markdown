@@ -45,17 +45,18 @@ class DokuWiki2MarkDown:
         # Transform the rest ()
         # - bold and block quotes share the same syntax in DokuWiki and MarkDown
         transforms = [
+            DokuWiki2MarkDown._tr_links_initial_escape,
             DokuWiki2MarkDown._tr_headers,
             DokuWiki2MarkDown._tr_italic,
             DokuWiki2MarkDown._tr_underline,
             DokuWiki2MarkDown._tr_monospaced,
             DokuWiki2MarkDown._tr_strikethrough,
-            DokuWiki2MarkDown._tr_links,
             DokuWiki2MarkDown._tr_images,
             DokuWiki2MarkDown._tr_footnotes,
             DokuWiki2MarkDown._tr_tables,
             DokuWiki2MarkDown._tr_lists,
             DokuWiki2MarkDown._tr_linebreaks,
+            DokuWiki2MarkDown._tr_links_unescape,
             DokuWiki2MarkDown._rm_single_space_at_line_end,
             DokuWiki2MarkDown._rm_newlines
             ]
@@ -84,13 +85,31 @@ class DokuWiki2MarkDown:
         return re.sub(r'<del>(.*?)</del>', r'~~\1~~', text)
 
     @staticmethod
-    def _tr_links(text: str) -> str:
+    def _tr_links_initial_escape(text: str) -> str:
         def replace_link(match):
             url, _, title = match.groups()
             if not title:
                 title = url
+            
+            # hack to avoid italic, bold, underline getting crushed
+            url = re.sub(r'/', "##URL#ESCAPED#SLASH##", url)
+            url = re.sub(r'\*', "##URL#ESCAPED#ASTERISK##", url)
+            url = re.sub(r'_', "##URL#ESCAPED#UNDERSCORE##", url)
+
+            title = re.sub(r'/', "##URL#ESCAPED#SLASH##", title)
+            title = re.sub(r'\*', "##URL#ESCAPED#ASTERISK##", title)
+            title = re.sub(r'_', "##URL#ESCAPED#UNDERSCORE##", title)
+            
             return f'[{title}]({url})'
         return re.sub(r'\[\[(.*?)(\|(.*?))?\]\]', replace_link, text)
+
+    @staticmethod
+    def _tr_links_unescape(text: str) -> str:
+        text = re.sub("##URL#ESCAPED#SLASH##", "/", text)
+        text = re.sub("##URL#ESCAPED#ASTERISK##", "*", text)
+        text = re.sub("##URL#ESCAPED#UNDERSCORE##", "_", text)
+        
+        return text
 
     @staticmethod
     def _tr_headers(text: str) -> str:
