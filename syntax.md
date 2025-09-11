@@ -35,7 +35,7 @@ DokuWiki supports multiple ways of creating links.
 
 ### External
 
-External links are recognized automagically: http:*www.google.com or simply www.google.com - You can set the link text as well: [This Link points to google](http:*www.google.com). Email addresses like this one: <andi@splitbrain.org> are recognized, too.
+External links are recognized automagically: http://www.google.com or simply www.google.com - You can set the link text as well: [This Link points to google](http://www.google.com). Email addresses like this one: <andi@splitbrain.org> are recognized, too.
 
 DokuWiki supports multiple ways of creating links. External links are recognized
   automagically: http://www.google.com or simply www.google.com - You can set
@@ -134,7 +134,7 @@ You can use up to five different levels of headlines to structure your content. 
 
 By using four or more dashes, you can make a horizontal line:
 
-1.---
+----
 
 ## Media Files
 

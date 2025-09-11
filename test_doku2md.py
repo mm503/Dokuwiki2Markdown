@@ -44,8 +44,9 @@ class TestDokuwikiToMarkdown(unittest.TestCase):
         self.assertEqual('~~strikethrough text~~ \n', self.dtm._tr_strikethrough('<del>strikethrough text</del> \n'))
 
     def test_links(self):
-        self.assertEqual('[Example](https://example.com)', self.dtm._tr_links('[[https://example.com|Example]]'))
-        self.assertEqual('[https://example.com](https://example.com)', self.dtm._tr_links('[[https://example.com]]'))
+        self.assertEqual('[Example](https://example.com)\n', self.dtm._dokuwiki_to_markdown('[[https://example.com|Example]]', None, None))
+        self.assertEqual('[https://example.com](https://example.com)\n', self.dtm._dokuwiki_to_markdown('[[https://example.com]]', None, None))
+        self.assertEqual('[https://example.com//two//slashes](https://example.com//two//slashes)\n', self.dtm._dokuwiki_to_markdown('[[https://example.com//two//slashes]]', None, None))
 
     def test_headers(self):
         self.assertEqual('# Headline L1\n\n', self.dtm._tr_headers('====== Headline L1 ======\n'))
@@ -114,6 +115,7 @@ class TestDokuwikiToMarkdown(unittest.TestCase):
         self.assertEqual('1. Ordered item', self.dtm._tr_lists('  - Ordered item'))
         self.assertEqual('  * Nested unordered item', self.dtm._tr_lists('    * Nested unordered item'))
         self.assertEqual('  1. Nested ordered item', self.dtm._tr_lists('    - Nested ordered item'))
+        self.assertEqual('----', self.dtm._tr_lists('----')) # avoid horizontal rule
 
     def test_newlines(self):
         self.assertEqual('\n', self.dtm._rm_newlines('\n'))
