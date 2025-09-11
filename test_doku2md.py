@@ -115,6 +115,7 @@ class TestDokuwikiToMarkdown(unittest.TestCase):
         self.assertEqual('1. Ordered item', self.dtm._tr_lists('  - Ordered item'))
         self.assertEqual('  * Nested unordered item', self.dtm._tr_lists('    * Nested unordered item'))
         self.assertEqual('  1. Nested ordered item', self.dtm._tr_lists('    - Nested ordered item'))
+        self.assertEqual('----', self.dtm._tr_lists('----')) # avoid horizontal rule
 
     def test_newlines(self):
         self.assertEqual('\n', self.dtm._rm_newlines('\n'))

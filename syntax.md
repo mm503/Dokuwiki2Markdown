@@ -134,7 +134,7 @@ You can use up to five different levels of headlines to structure your content. 
 
 By using four or more dashes, you can make a horizontal line:
 
-1.---
+----
 
 ## Media Files
 

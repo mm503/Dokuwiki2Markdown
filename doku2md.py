@@ -141,7 +141,7 @@ class DokuWiki2MarkDown:
         ordered_list_counter = 0
         for i, line in enumerate(lines):
             match = re.match(r'(\s*)([-*])(.*)', line)
-            if match:
+            if match and not line.startswith("----"):
                 spaces, bullet, rest = match.groups()
                 indentation = len(spaces) // 2 - 1
                 if bullet == '-':
