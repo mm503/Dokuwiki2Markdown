@@ -60,19 +60,39 @@ class TestDokuwikiToMarkdown(unittest.TestCase):
         self.assertEqual('= Not A Headline =\n', self.dtm._tr_headers('= Not A Headline =\n'))
 
     def test_code_blocks(self):
-        self.assertEqual('\n\n```\ncode text\n```\n', self.dtm._tr_codeblocks('<code>\ncode text\n</code>', None))
-        self.assertEqual('\n\n```\ncode text\n```\n', self.dtm._tr_codeblocks('<file>\ncode text\n</file>', None))
-        self.assertEqual('\n\n```\ncode text\n```\n', self.dtm._tr_codeblocks('<file>code text</file>', None))
-        self.assertEqual('\n\n```\ncode text\n```\n', self.dtm._tr_codeblocks('<file>\ncode text</file>', None))
-        self.assertEqual('\n\n```\ncode text\n```\n', self.dtm._tr_codeblocks('<file>code text\n</file>', None))
-        self.assertEqual('\n\n```\ncode text\n```\n', self.dtm._tr_codeblocks('\n<file>code text\n</file>', None))
+        self.assertEqual('\n\n```\ncode text\n```\n\n', self.dtm._dokuwiki_to_markdown('<code>\ncode text\n</code>', None, False))
+        self.assertEqual('\n\n```\ncode text\n```\n\n', self.dtm._dokuwiki_to_markdown('<file>\ncode text\n</file>', None, False))
+        self.assertEqual('\n\n```\ncode text\n```\n\n', self.dtm._dokuwiki_to_markdown('<file>code text</file>', None, False))
+        self.assertEqual('\n\n```\ncode text\n```\n\n', self.dtm._dokuwiki_to_markdown('<file>\ncode text</file>', None, False))
+        self.assertEqual('\n\n```\ncode text\n```\n\n', self.dtm._dokuwiki_to_markdown('<file>code text\n</file>', None, False))
+        self.assertEqual('\n\n```\ncode text\n```\n\n', self.dtm._dokuwiki_to_markdown('\n<file>code text\n</file>', None, False))
         # with lang
-        self.assertEqual('\n\n```shell\ncode text\n```\n', self.dtm._tr_codeblocks('<code>\ncode text\n</code>', 'shell'))
-        self.assertEqual('\n\n```shell\ncode text\n```\n', self.dtm._tr_codeblocks('<file>\ncode text\n</file>', 'shell'))
-        self.assertEqual('\n\n```shell\ncode text\n```\n', self.dtm._tr_codeblocks('<file>code text</file>', 'shell'))
-        self.assertEqual('\n\n```shell\ncode text\n```\n', self.dtm._tr_codeblocks('<file>\ncode text</file>', 'shell'))
-        self.assertEqual('\n\n```shell\ncode text\n```\n', self.dtm._tr_codeblocks('<file>code text\n</file>', 'shell'))
-        self.assertEqual('\n\n```shell\ncode text\n```\n', self.dtm._tr_codeblocks('\n<file>code text\n</file>', 'shell'))
+        self.assertEqual('\n\n```shell\ncode text\n```\n\n', self.dtm._dokuwiki_to_markdown('<code>\ncode text\n</code>', 'shell', False))
+        self.assertEqual('\n\n```shell\ncode text\n```\n\n', self.dtm._dokuwiki_to_markdown('<file>\ncode text\n</file>', 'shell', False))
+        self.assertEqual('\n\n```shell\ncode text\n```\n\n', self.dtm._dokuwiki_to_markdown('<file>code text</file>', 'shell', False))
+        self.assertEqual('\n\n```shell\ncode text\n```\n\n', self.dtm._dokuwiki_to_markdown('<file>\ncode text</file>', 'shell', False))
+        self.assertEqual('\n\n```shell\ncode text\n```\n\n', self.dtm._dokuwiki_to_markdown('<file>code text\n</file>', 'shell', False))
+        self.assertEqual('\n\n```shell\ncode text\n```\n\n', self.dtm._dokuwiki_to_markdown('\n<file>code text\n</file>', 'shell', False))
+
+    def test_code_blocks_no_transformation(self):
+        # Test that content inside code blocks is not transformed
+        # Lists should not be converted
+        input_text = '<code>\n  - List item\n  * Another item\n</code>'
+        expected = '\n\n```\n  - List item\n  * Another item\n```\n\n'
+        result = self.dtm._dokuwiki_to_markdown(input_text, None, False)
+        self.assertEqual(expected, result)
+
+        # Italic/bold/underline should not be converted
+        input_text2 = '<code>\n//italic//\n**bold**\n__underline__\n</code>'
+        expected2 = '\n\n```\n//italic//\n**bold**\n__underline__\n```\n\n'
+        result2 = self.dtm._dokuwiki_to_markdown(input_text2, None, False)
+        self.assertEqual(expected2, result2)
+
+        # Test that real content outside code blocks is still transformed
+        input_text3 = '//italic//\n<code>\n//not italic//\n</code>\n//italic again//'
+        expected3 = '*italic*\n\n```\n//not italic//\n```\n\n*italic again*\n'
+        result3 = self.dtm._dokuwiki_to_markdown(input_text3, None, False)
+        self.assertEqual(expected3, result3)
 
     def test_images(self):
         self.assertEqual('![alt text](image.png)', self.dtm._tr_images('{{image.png|alt text}}'))

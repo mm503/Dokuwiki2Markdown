@@ -40,7 +40,9 @@ class DokuWiki2MarkDown:
         # Remove timestamps if elected
         if not timestamps:
             dokuwiki_text = DokuWiki2MarkDown._rm_timestamp(dokuwiki_text)
-        dokuwiki_text = DokuWiki2MarkDown._tr_codeblocks(dokuwiki_text, codeblk_lang)
+
+        # Extract and protect code blocks before other transformations
+        codeblocks, dokuwiki_text = DokuWiki2MarkDown._extract_codeblocks(dokuwiki_text, codeblk_lang)
 
         # Transform the rest ()
         # - bold and block quotes share the same syntax in DokuWiki and MarkDown
@@ -61,6 +63,10 @@ class DokuWiki2MarkDown:
             DokuWiki2MarkDown._rm_newlines
             ]
         dokuwiki_text = reduce(lambda text, func: func(text), transforms, dokuwiki_text)
+
+        # Restore code blocks
+        dokuwiki_text = DokuWiki2MarkDown._restore_codeblocks(dokuwiki_text, codeblocks)
+
         return dokuwiki_text
 
     @staticmethod
@@ -99,7 +105,7 @@ class DokuWiki2MarkDown:
             title = re.sub(r'/', "##URL#ESCAPED#SLASH##", title)
             title = re.sub(r'\*', "##URL#ESCAPED#ASTERISK##", title)
             title = re.sub(r'_', "##URL#ESCAPED#UNDERSCORE##", title)
-            
+
             return f'[{title}]({url})'
         return re.sub(r'\[\[(.*?)(\|(.*?))?\]\]', replace_link, text)
 
@@ -118,10 +124,31 @@ class DokuWiki2MarkDown:
         return text
 
     @staticmethod
-    def _tr_codeblocks(text: str, lang) -> str:
-        lang_type = '' if lang is None else lang
-        return re.sub(r'\n*<(?:code|file)[^>]*>\n{0,}(.*?)\n{0,}</(?:code|file)>',
-                      rf'\n\n```{lang_type}\n\1\n```\n', text, flags=re.DOTALL)
+    def _extract_codeblocks(text: str, lang):
+        """Extract code blocks and replace them with placeholders."""
+        codeblocks = []
+        counter = [0]  # Use list to allow modification in nested function
+
+        def replace_with_placeholder(match):
+            lang_type = '' if lang is None else lang
+            code_content = match.group(1)
+            placeholder = f'##CODEBLOCK#PLACEHOLDER#{counter[0]}##'
+            codeblocks.append(f'\n\n```{lang_type}\n{code_content}\n```\n')
+            counter[0] += 1
+            return placeholder
+
+        text = re.sub(r'\n*<(?:code|file)[^>]*>\n{0,}(.*?)\n{0,}</(?:code|file)>',
+                      replace_with_placeholder, text, flags=re.DOTALL)
+        return codeblocks, text
+
+    @staticmethod
+    def _restore_codeblocks(text: str, codeblocks):
+        """Restore code blocks from placeholders."""
+        for i, codeblock in enumerate(codeblocks):
+            placeholder = f'##CODEBLOCK#PLACEHOLDER#{i}##'
+            text = text.replace(placeholder, codeblock)
+        return text
+
 
     @staticmethod
     def _tr_images(text: str) -> str:
