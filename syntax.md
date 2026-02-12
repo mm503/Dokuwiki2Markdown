@@ -83,24 +83,25 @@ Windows Shares like [this](\\server\share) are recognized, too.
 Notes:
 
 * For security reasons direct browsing of windows shares only works in Microsoft Internet Explorer per default (and only in the "local zone").
-* For Mozilla and Firefox it can be enabled through different workaround mentioned in the [Mozilla Knowledge Base](http://kb.mozillazine.org/Links_to_local_pages_do_not_work). However, there will still be a JavaScript warning about trying to open a Windows Share. To remove this warning (for all users), put the following line in `conf/lang/en/lang.php` (more details at [localization](doku>localization#changing_some_localized_texts_and_strings_in_your_installation)):
+* For Mozilla and Firefox it can be enabled through different workaround mentioned in the [Mozilla Knowledge Base](http://kb.mozillazine.org/Links_to_local_pages_do_not_work). However, there will still be a JavaScript warning about trying to open a Windows Share. To remove this warning (for all users), put the following line in `conf/lang/en/lang.php` (more details at [localization](doku>localization#changing_some_localized_texts_and_strings_in_your_installation)): 
 
 ```
 <?php
 /**
-* Customization of the english language file
-* Copy only the strings that needs to be modified
-*/
+ * Customization of the english language file
+ * Copy only the strings that needs to be modified
+ */
 $lang['js']['nosmblinks'] = '';
 ```
+
 
 ### Image Links
 
 You can also use an image to link to another internal or external page by combining the syntax for links and [images](#images_and_other_files) (see below) like this:
 
-[![](wiki:dokuwiki-128.png)](http://php.net)
+[![wiki:dokuwiki-128](wiki:dokuwiki-128.png)](http://php.net)
 
-[![](wiki:dokuwiki-128.png)](http://php.net)
+[![wiki:dokuwiki-128](wiki:dokuwiki-128.png)](http://php.net)
 
 Please note: The image formatting is the only formatting syntax accepted in link names.
 
@@ -112,9 +113,9 @@ You can add footnotes [^1]
 
 [^1]: This is a footnote by using double parentheses.
 
-You can add footnotes [^1]
+You can add footnotes [^2]
 
-[^1]: This is a footnote by using double parentheses.
+[^2]: This is a footnote by using double parentheses.
 
 ## Sectioning
 
@@ -140,32 +141,32 @@ By using four or more dashes, you can make a horizontal line:
 
 You can include external and internal [images, videos and audio files](doku>images) with curly brackets. Optionally you can specify the size of them.
 
-Real size:                        ![](wiki:dokuwiki-128.png)
+Real size:                        ![wiki:dokuwiki-128](wiki:dokuwiki-128.png)
 
-Resize to given width:            ![](wiki:dokuwiki-128.png?50)
+Resize to given width:            ![wiki:dokuwiki-128](wiki:dokuwiki-128.png?50)
 
-Resize to given width and height[^1]
+Resize to given width and height[^3]
 
-[^1]: when the aspect ratio of the given width and height doesn't match that of the image, it will be cropped to the new ratio before resizing: ![](wiki:dokuwiki-128.png?200x50)
+[^3]: when the aspect ratio of the given width and height doesn't match that of the image, it will be cropped to the new ratio before resizing: ![wiki:dokuwiki-128](wiki:dokuwiki-128.png?200x50)
 
-Resized external image:           ![](https://secure.php.net/images/php.gif?200x50)
+Resized external image:           ![php](https://secure.php.net/images/php.gif?200x50)
 
-Real size:                        ![](wiki:dokuwiki-128.png)
-  Resize to given width:            ![](wiki:dokuwiki-128.png?50)
-  Resize to given width and height: ![](wiki:dokuwiki-128.png?200x50)
-  Resized external image:           ![](https://secure.php.net/images/php.gif?200x50)
+Real size:                        ![wiki:dokuwiki-128](wiki:dokuwiki-128.png)
+  Resize to given width:            ![wiki:dokuwiki-128](wiki:dokuwiki-128.png?50)
+  Resize to given width and height: ![wiki:dokuwiki-128](wiki:dokuwiki-128.png?200x50)
+  Resized external image:           ![php](https://secure.php.net/images/php.gif?200x50)
 
 By using left or right whitespaces you can choose the alignment.
 
-![]( wiki:dokuwiki-128.png)
+![ wiki:dokuwiki-128]( wiki:dokuwiki-128.png)
 
-![](wiki:dokuwiki-128.png )
+![wiki:dokuwiki-128](wiki:dokuwiki-128.png )
 
-![]( wiki:dokuwiki-128.png )
+![ wiki:dokuwiki-128]( wiki:dokuwiki-128.png )
 
-![]( wiki:dokuwiki-128.png)
-  ![](wiki:dokuwiki-128.png )
-  ![]( wiki:dokuwiki-128.png )
+![ wiki:dokuwiki-128]( wiki:dokuwiki-128.png)
+  ![wiki:dokuwiki-128](wiki:dokuwiki-128.png )
+  ![ wiki:dokuwiki-128]( wiki:dokuwiki-128.png )
 
 Of course, you can add a title (displayed as a tooltip by most browsers), too.
 
@@ -189,9 +190,9 @@ If you specify a filename that is not a supported media format, then it will be 
 
 By adding `?linkonly` you provide a link to the media without displaying it inline
 
-![](wiki:dokuwiki-128.png?linkonly)
+![wiki:dokuwiki-128](wiki:dokuwiki-128.png?linkonly)
 
-![](wiki:dokuwiki-128.png?linkonly) This is just a link to the image.
+![wiki:dokuwiki-128](wiki:dokuwiki-128.png?linkonly) This is just a link to the image.
 
 ### Fallback Formats
 
@@ -220,16 +221,17 @@ Dokuwiki supports ordered and unordered lists. To create a list item, indent you
 4. That's it
 
 ```
-* This is a list
-* The second item
-  * You may have different levels
-* Another item
+  * This is a list
+  * The second item
+    * You may have different levels
+  * Another item
 
-1. The same list but ordered
-2. Another item
-  3. Just use indention for deeper levels
-4. That's it
+  - The same list but ordered
+  - Another item
+    - Just use indention for deeper levels
+  - That's it
 ```
+
 
 Also take a look at the [FAQ on list items](doku>faq:lists).
 
@@ -273,9 +275,10 @@ Typography: [DokuWiki](DokuWiki) can convert simple text characters to their typ
 "He thought 'It's a man's world'..."
 
 ```
-2.> <- <-> => <= <=> >> << -- --- 640x480 (c) (tm) (r)
+-> <- <-> => <= <=> >> << -- --- 640x480 (c) (tm) (r)
 "He thought 'It's a man's world'..."
 ```
+
 
 The same can be done to produce any kind of HTML, it just needs to be added to the [pattern file](doku>entities).
 
@@ -298,6 +301,7 @@ I think we should do it
 
 >>> Then lets do it!
 ```
+
 
 I think we should do it
 
@@ -396,50 +400,59 @@ The same is true for %%***this** text* with a smiley ;-)%%.
 You can include code blocks into your documents by either indenting them by at least two spaces (like used for the previous examples) or by using the tags ''%%
 
 ```
-%%` or `%%<file>%%''.
+%%'' or ''%%<file>%%''.
 
-This is text is indented by two spaces.
+  This is text is indented by two spaces.
 
 <code>
 This is preformatted code all spaces are preserved: like              <-this
 ```
 
+
 ```
 This is pretty much the same, but you could use it to show that you quoted a file.
 ```
+
 
 Those blocks were created by this source:
 
 This is text is indented by two spaces.
 
-```
-  This is preformatted code all spaces are preserved: like              <-this
+
 
 ```
+  This is preformatted code all spaces are preserved: like              <-this
+  
+```
+
+
+
 
 ```
   This is pretty much the same, but you could use it to show that you quoted a file.
-
+  
 ```
+
 
 ### Syntax Highlighting
 
 [wiki:DokuWiki](wiki:DokuWiki) can highlight sourcecode, which makes it easier to read. It uses the [GeSHi](http://qbnz.com/highlighter/) Generic Syntax Highlighter -- so any language supported by GeSHi is supported. The syntax uses the same code and file blocks described in the previous section, but this time the name of the language syntax to be highlighted is included inside the tag, e.g. ''<nowiki>
 
 ```
-</nowiki>` or `<nowiki><file java></nowiki>''.
+</nowiki>'' or ''<nowiki><file java></nowiki>''.
 
 <code java>
 /**
-* The HelloWorldApp class implements an application that
-* simply displays "Hello World!" to the standard output.
-*/
+ * The HelloWorldApp class implements an application that
+ * simply displays "Hello World!" to the standard output.
+ */
 class HelloWorldApp {
     public static void main(String[] args) {
         System.out.println("Hello World!"); //Display the string.
     }
 }
 ```
+
 
 The following language strings are currently recognized: *4cs 6502acme 6502kickass 6502tasm 68000devpac abap actionscript3 actionscript ada aimms algol68 apache applescript apt_sources arm asm asp asymptote autoconf autohotkey autoit avisynth awk bascomavr bash basic4gl batch bf biblatex bibtex blitzbasic bnf boo caddcl cadlisp ceylon cfdg cfm chaiscript chapel cil c_loadrunner clojure c_mac cmake cobol coffeescript c cpp cpp-qt cpp-winapi csharp css cuesheet c_winapi dart dcl dcpu16 dcs delphi diff div dos dot d ecmascript eiffel email epc e erlang euphoria ezt f1 falcon fo fortran freebasic freeswitch fsharp gambas gdb genero genie gettext glsl gml gnuplot go groovy gwbasic haskell haxe hicest hq9plus html html4strict html5 icon idl ini inno intercal io ispfpanel java5 java javascript jcl j jquery julia kixtart klonec klonecpp kotlin latex lb ldif lisp llvm locobasic logtalk lolcode lotusformulas lotusscript lscript lsl2 lua m68k magiksf make mapbasic mathematica matlab mercury metapost mirc mk-61 mmix modula2 modula3 mpasm mxml mysql nagios netrexx newlisp nginx nimrod nsis oberon2 objc objeck ocaml-brief ocaml octave oobas oorexx oracle11 oracle8 oxygene oz parasail parigp pascal pcre perl6 perl per pf phix php-brief php pic16 pike pixelbender pli plsql postgresql postscript povray powerbuilder powershell proftpd progress prolog properties providex purebasic pycon pys60 python qbasic qml q racket rails rbs rebol reg rexx robots roff rpmspec rsplus ruby rust sas sass scala scheme scilab scl sdlbasic smalltalk smarty spark sparql sql sshconfig standardml stonescript swift systemverilog tclegg tcl teraterm texgraph text thinbasic tsql twig typoscript unicon upc urbi uscript vala vbnet vb vbscript vedit verilog vhdl vim visualfoxpro visualprolog whitespace whois winbatch wolfram xbasic xml xojo xorg_conf xpp yaml z80 zxbasic*
 
@@ -450,7 +463,7 @@ There are additional [advanced options](doku>syntax_highlighting) available for 
 When you use the ''%%
 
 ```
-%%` or `%%<file>%%'' syntax as above, you might want to make the shown code available for download as well. You can do this by specifying a file name after language code like this:
+%%'' or ''%%<file>%%'' syntax as above, you might want to make the shown code available for download as well. You can do this by specifying a file name after language code like this:
 
 <code>
 <file php myexample.php>
@@ -462,6 +475,7 @@ When you use the ''%%
 ```
 <?php echo "hello world!"; ?>
 ```
+
 
 If you don't want any highlighting but want a downloadable file, specify a dash (`-`) as the language code: `%%<code - myfile.foo>%%`.
 
@@ -485,9 +499,9 @@ By default the feed will be sorted by date, newest items first. You can sort it 
 
 **Example:**
 
-![](rss>http://slashdot.org/index.rss 5 author date 1h )
+![index](rss>http://slashdot.org/index.rss 5 author date 1h )
 
-![](rss>http://slashdot.org/index.rss 5 author date 1h )
+![index](rss>http://slashdot.org/index.rss 5 author date 1h )
 
 ## Control Macros
 
