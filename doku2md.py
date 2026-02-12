@@ -153,6 +153,9 @@ class DokuWiki2MarkDown:
                     # Reset counter when encountering an unordered list item
                     ordered_list_counter = 0
                 lines[i] = '  '*indentation + bullet + rest
+            else:
+                # Reset counter when encountering a non-list line
+                ordered_list_counter = 0
         return '\n'.join(lines)
 
     @staticmethod

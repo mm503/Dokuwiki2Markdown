@@ -117,6 +117,12 @@ class TestDokuwikiToMarkdown(unittest.TestCase):
         self.assertEqual('  1. Nested ordered item', self.dtm._tr_lists('    - Nested ordered item'))
         self.assertEqual('----', self.dtm._tr_lists('----')) # avoid horizontal rule
 
+    def test_lists_counter_reset(self):
+        # Test that ordered list counter resets between separate lists
+        input_text = '  - First item 1\n  - First item 2\n\n  - Second item 1\n  - Second item 2'
+        expected = '1. First item 1\n2. First item 2\n\n1. Second item 1\n2. Second item 2'
+        self.assertEqual(expected, self.dtm._tr_lists(input_text))
+
     def test_newlines(self):
         self.assertEqual('\n', self.dtm._rm_newlines('\n'))
         self.assertEqual('\n\n', self.dtm._rm_newlines('\n\n'))
