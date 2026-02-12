@@ -67,7 +67,8 @@ class DokuWiki2MarkDown:
         # Restore code blocks
         dokuwiki_text = DokuWiki2MarkDown._restore_codeblocks(dokuwiki_text, codeblocks)
 
-        return dokuwiki_text
+        # Strip leading/trailing whitespace
+        return dokuwiki_text.strip() + '\n' if dokuwiki_text.strip() else ''
 
     @staticmethod
     def _rm_timestamp(text: str) -> str:
@@ -152,11 +153,33 @@ class DokuWiki2MarkDown:
 
     @staticmethod
     def _tr_images(text: str) -> str:
-        return re.sub(r'\{\{(.*?)(\|(.*?))?\}\}', r'![\3](\1)', text)
+        """Convert images, using filename as alt text if not provided."""
+        def replace_image(match):
+            image_path = match.group(1)
+            alt_text = match.group(3)
+
+            # If no alt text provided, use the filename (without path and extension)
+            if not alt_text:
+                # Extract filename from path, remove query params and extension for alt text
+                filename = image_path.split('/')[-1].split('?')[0]
+                # Remove extension
+                alt_text = filename.rsplit('.', 1)[0] if '.' in filename else filename
+
+            return f'![{alt_text}]({image_path})'
+
+        return re.sub(r'\{\{(.*?)(\|(.*?))?\}\}', replace_image, text)
 
     @staticmethod
     def _tr_footnotes(text: str) -> str:
-        return re.sub(r'\(\((.*?)\)\)', r'[^1]\n\n[^1]: \1', text)
+        """Convert footnotes with unique numbering."""
+        counter = [0]  # Use list to allow modification in nested function
+
+        def replace_footnote(match):
+            counter[0] += 1
+            footnote_text = match.group(1)
+            return f'[^{counter[0]}]\n\n[^{counter[0]}]: {footnote_text}'
+
+        return re.sub(r'\(\((.*?)\)\)', replace_footnote, text)
 
     @staticmethod
     def _tr_linebreaks(text: str) -> str:
