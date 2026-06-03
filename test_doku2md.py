@@ -47,6 +47,9 @@ class TestDokuwikiToMarkdown(unittest.TestCase):
         self.assertEqual('[Example](https://example.com)\n', self.dtm._dokuwiki_to_markdown('[[https://example.com|Example]]', None, None))
         self.assertEqual('[https://example.com](https://example.com)\n', self.dtm._dokuwiki_to_markdown('[[https://example.com]]', None, None))
         self.assertEqual('[https://example.com//two//slashes](https://example.com//two//slashes)\n', self.dtm._dokuwiki_to_markdown('[[https://example.com//two//slashes]]', None, None))
+        # Internal links with namespace colons should be converted to path slashes
+        self.assertEqual('[For Test Subpage Click Here!](playground/playground/testsubpage)\n', self.dtm._dokuwiki_to_markdown('[[playground:playground:testsubpage|For Test Subpage Click Here!]]', None, None))
+        self.assertEqual('[some:namespaces](some/namespaces)\n', self.dtm._dokuwiki_to_markdown('[[some:namespaces]]', None, None))
 
     def test_headers(self):
         self.assertEqual('# Headline L1\n\n', self.dtm._tr_headers('====== Headline L1 ======\n'))
@@ -101,6 +104,14 @@ class TestDokuwikiToMarkdown(unittest.TestCase):
         self.assertEqual('![photo](path/to/photo.jpg)', self.dtm._tr_images('{{path/to/photo.jpg}}'))
         # Test with query parameters
         self.assertEqual('![image](image.png?50)', self.dtm._tr_images('{{image.png?50}}'))
+        # Leading colon (root namespace) should be stripped
+        self.assertEqual('![Test Image Tooltip](anteater.jpg)', self.dtm._tr_images('{{:anteater.jpg|Test Image Tooltip}}'))
+        self.assertEqual('![anteater](anteater.jpg)', self.dtm._tr_images('{{:anteater.jpg}}'))
+        # Namespace colons in internal image paths should become slashes
+        self.assertEqual('![dokuwiki-128](wiki/dokuwiki-128.png)', self.dtm._tr_images('{{wiki:dokuwiki-128.png}}'))
+        self.assertEqual('![wiki:dokuwiki-128](wiki/dokuwiki-128.png)', self.dtm._tr_images('{{wiki:dokuwiki-128.png|wiki:dokuwiki-128}}'))
+        # External image URLs should remain unchanged
+        self.assertEqual('![php](https://secure.php.net/images/php.gif?200x50)', self.dtm._tr_images('{{https://secure.php.net/images/php.gif?200x50}}'))
 
     def test_footnotes(self):
         self.assertEqual('[^1]\n\n[^1]: Footnote text', self.dtm._tr_footnotes('((Footnote text))'))
