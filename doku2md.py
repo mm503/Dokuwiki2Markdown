@@ -97,7 +97,11 @@ class DokuWiki2MarkDown:
             url, _, title = match.groups()
             if not title:
                 title = url
-            
+
+            # Convert DokuWiki namespace separators to path separators for internal links
+            if not re.match(r'\w+://', url) and '>' not in url:
+                url = url.replace(':', '/')
+
             # hack to avoid italic, bold, underline getting crushed
             url = re.sub(r'/', "##URL#ESCAPED#SLASH##", url)
             url = re.sub(r'\*', "##URL#ESCAPED#ASTERISK##", url)
@@ -157,6 +161,11 @@ class DokuWiki2MarkDown:
         def replace_image(match):
             image_path = match.group(1)
             alt_text = match.group(3)
+
+            # Convert DokuWiki namespace separators to path separators for internal images
+            if not re.match(r'https?://', image_path.strip()):
+                image_path = image_path.lstrip(':')
+                image_path = image_path.replace(':', '/')
 
             # If no alt text provided, use the filename (without path and extension)
             if not alt_text:

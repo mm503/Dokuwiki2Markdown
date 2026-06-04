@@ -1,6 +1,6 @@
 # Formatting Syntax
 
-[doku>DokuWiki](doku>DokuWiki) supports some simple markup language, which tries to make the datafiles to be as readable as possible. This page contains all possible syntax you may use when editing the pages. Simply have a look at the source of this page by pressing "Edit this page". If you want to try something, just use the [playground](playground:playground) page. The simpler markup is easily accessible via [quickbuttons](doku>toolbar), too.
+[doku>DokuWiki](doku>DokuWiki) supports some simple markup language, which tries to make the datafiles to be as readable as possible. This page contains all possible syntax you may use when editing the pages. Simply have a look at the source of this page by pressing "Edit this page". If you want to try something, just use the [playground](playground/playground) page. The simpler markup is easily accessible via [quickbuttons](doku>toolbar), too.
 
 ## Basic Text Formatting
 
@@ -51,9 +51,9 @@ Internal links are created by using square brackets. You can either just give
 
 [Wiki pagenames](doku>pagename) are converted to lowercase automatically, special characters are not allowed.
 
-You can use [some:namespaces](some:namespaces) by using a colon in the pagename.
+You can use [some:namespaces](some/namespaces) by using a colon in the pagename.
 
-You can use [some:namespaces](some:namespaces) by using a colon in the pagename.
+You can use [some:namespaces](some/namespaces) by using a colon in the pagename.
 
 For details about namespaces see [doku>namespaces](doku>namespaces).
 
@@ -99,9 +99,9 @@ $lang['js']['nosmblinks'] = '';
 
 You can also use an image to link to another internal or external page by combining the syntax for links and [images](#images_and_other_files) (see below) like this:
 
-[![wiki:dokuwiki-128](wiki:dokuwiki-128.png)](http://php.net)
+[![dokuwiki-128](wiki/dokuwiki-128.png)](http://php.net)
 
-[![wiki:dokuwiki-128](wiki:dokuwiki-128.png)](http://php.net)
+[![dokuwiki-128](wiki/dokuwiki-128.png)](http://php.net)
 
 Please note: The image formatting is the only formatting syntax accepted in link names.
 
@@ -141,38 +141,38 @@ By using four or more dashes, you can make a horizontal line:
 
 You can include external and internal [images, videos and audio files](doku>images) with curly brackets. Optionally you can specify the size of them.
 
-Real size:                        ![wiki:dokuwiki-128](wiki:dokuwiki-128.png)
+Real size:                        ![dokuwiki-128](wiki/dokuwiki-128.png)
 
-Resize to given width:            ![wiki:dokuwiki-128](wiki:dokuwiki-128.png?50)
+Resize to given width:            ![dokuwiki-128](wiki/dokuwiki-128.png?50)
 
 Resize to given width and height[^3]
 
-[^3]: when the aspect ratio of the given width and height doesn't match that of the image, it will be cropped to the new ratio before resizing: ![wiki:dokuwiki-128](wiki:dokuwiki-128.png?200x50)
+[^3]: when the aspect ratio of the given width and height doesn't match that of the image, it will be cropped to the new ratio before resizing: ![dokuwiki-128](wiki/dokuwiki-128.png?200x50)
 
 Resized external image:           ![php](https://secure.php.net/images/php.gif?200x50)
 
-Real size:                        ![wiki:dokuwiki-128](wiki:dokuwiki-128.png)
-  Resize to given width:            ![wiki:dokuwiki-128](wiki:dokuwiki-128.png?50)
-  Resize to given width and height: ![wiki:dokuwiki-128](wiki:dokuwiki-128.png?200x50)
+Real size:                        ![dokuwiki-128](wiki/dokuwiki-128.png)
+  Resize to given width:            ![dokuwiki-128](wiki/dokuwiki-128.png?50)
+  Resize to given width and height: ![dokuwiki-128](wiki/dokuwiki-128.png?200x50)
   Resized external image:           ![php](https://secure.php.net/images/php.gif?200x50)
 
 By using left or right whitespaces you can choose the alignment.
 
-![ wiki:dokuwiki-128]( wiki:dokuwiki-128.png)
+![dokuwiki-128]( wiki/dokuwiki-128.png)
 
-![wiki:dokuwiki-128](wiki:dokuwiki-128.png )
+![dokuwiki-128](wiki/dokuwiki-128.png )
 
-![ wiki:dokuwiki-128]( wiki:dokuwiki-128.png )
+![dokuwiki-128]( wiki/dokuwiki-128.png )
 
-![ wiki:dokuwiki-128]( wiki:dokuwiki-128.png)
-  ![wiki:dokuwiki-128](wiki:dokuwiki-128.png )
-  ![ wiki:dokuwiki-128]( wiki:dokuwiki-128.png )
+![dokuwiki-128]( wiki/dokuwiki-128.png)
+  ![dokuwiki-128](wiki/dokuwiki-128.png )
+  ![dokuwiki-128]( wiki/dokuwiki-128.png )
 
 Of course, you can add a title (displayed as a tooltip by most browsers), too.
 
-![This is the caption]( wiki:dokuwiki-128.png )
+![This is the caption]( wiki/dokuwiki-128.png )
 
-![This is the caption]( wiki:dokuwiki-128.png )
+![This is the caption]( wiki/dokuwiki-128.png )
 
 For linking an image to another page see [#Image Links](#Image Links) above.
 
@@ -190,9 +190,9 @@ If you specify a filename that is not a supported media format, then it will be 
 
 By adding `?linkonly` you provide a link to the media without displaying it inline
 
-![wiki:dokuwiki-128](wiki:dokuwiki-128.png?linkonly)
+![dokuwiki-128](wiki/dokuwiki-128.png?linkonly)
 
-![wiki:dokuwiki-128](wiki:dokuwiki-128.png?linkonly) This is just a link to the image.
+![dokuwiki-128](wiki/dokuwiki-128.png?linkonly) This is just a link to the image.
 
 ### Fallback Formats
 
@@ -436,7 +436,7 @@ This is text is indented by two spaces.
 
 ### Syntax Highlighting
 
-[wiki:DokuWiki](wiki:DokuWiki) can highlight sourcecode, which makes it easier to read. It uses the [GeSHi](http://qbnz.com/highlighter/) Generic Syntax Highlighter -- so any language supported by GeSHi is supported. The syntax uses the same code and file blocks described in the previous section, but this time the name of the language syntax to be highlighted is included inside the tag, e.g. ''<nowiki>
+[wiki:DokuWiki](wiki/DokuWiki) can highlight sourcecode, which makes it easier to read. It uses the [GeSHi](http://qbnz.com/highlighter/) Generic Syntax Highlighter -- so any language supported by GeSHi is supported. The syntax uses the same code and file blocks described in the previous section, but this time the name of the language syntax to be highlighted is included inside the tag, e.g. ''<nowiki>
 
 ```
 </nowiki>'' or ''<nowiki><file java></nowiki>''.
@@ -493,15 +493,15 @@ If you don't want any highlighting but want a downloadable file, specify a dash 
 | nosort     | do not sort the items in the feed |
 | *n*[dhm] | refresh period, where d=days, h=hours, m=minutes. (e.g. 12h = 12 hours). |
 
-The refresh period defaults to 4 hours. Any value below 10 minutes will be treated as 10 minutes. [wiki:DokuWiki](wiki:DokuWiki) will generally try to supply a cached version of a page, obviously this is inappropriate when the page contains dynamic external content. The parameter tells [wiki:DokuWiki](wiki:DokuWiki) to re-render the page if it is more than *refresh period* since the page was last rendered.
+The refresh period defaults to 4 hours. Any value below 10 minutes will be treated as 10 minutes. [wiki:DokuWiki](wiki/DokuWiki) will generally try to supply a cached version of a page, obviously this is inappropriate when the page contains dynamic external content. The parameter tells [wiki:DokuWiki](wiki/DokuWiki) to re-render the page if it is more than *refresh period* since the page was last rendered.
 
 By default the feed will be sorted by date, newest items first. You can sort it by oldest first using the `reverse` parameter, or display the feed as is with `nosort`.
 
 **Example:**
 
-![index](rss>http://slashdot.org/index.rss 5 author date 1h )
+![index](rss>http///slashdot.org/index.rss 5 author date 1h )
 
-![index](rss>http://slashdot.org/index.rss 5 author date 1h )
+![index](rss>http///slashdot.org/index.rss 5 author date 1h )
 
 ## Control Macros
 
