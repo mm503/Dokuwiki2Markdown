@@ -35,7 +35,7 @@ DokuWiki supports multiple ways of creating links.
 
 ### External
 
-External links are recognized automagically: http://www.google.com or simply www.google.com - You can set the link text as well: [This Link points to google](http://www.google.com). Email addresses like this one: <andi@splitbrain.org> are recognized, too.
+External links are recognized automagically: http:*www.google.com or simply www.google.com - You can set the link text as well: [This Link points to google](http:*www.google.com). Email addresses like this one: <andi@splitbrain.org> are recognized, too.
 
 DokuWiki supports multiple ways of creating links. External links are recognized
   automagically: http://www.google.com or simply www.google.com - You can set
@@ -83,17 +83,16 @@ Windows Shares like [this](\\server\share) are recognized, too.
 Notes:
 
 * For security reasons direct browsing of windows shares only works in Microsoft Internet Explorer per default (and only in the "local zone").
-* For Mozilla and Firefox it can be enabled through different workaround mentioned in the [Mozilla Knowledge Base](http://kb.mozillazine.org/Links_to_local_pages_do_not_work). However, there will still be a JavaScript warning about trying to open a Windows Share. To remove this warning (for all users), put the following line in `conf/lang/en/lang.php` (more details at [localization](doku>localization#changing_some_localized_texts_and_strings_in_your_installation)): 
+* For Mozilla and Firefox it can be enabled through different workaround mentioned in the [Mozilla Knowledge Base](http://kb.mozillazine.org/Links_to_local_pages_do_not_work). However, there will still be a JavaScript warning about trying to open a Windows Share. To remove this warning (for all users), put the following line in `conf/lang/en/lang.php` (more details at [localization](doku>localization#changing_some_localized_texts_and_strings_in_your_installation)):
 
 ```
 <?php
 /**
- * Customization of the english language file
- * Copy only the strings that needs to be modified
- */
+* Customization of the english language file
+* Copy only the strings that needs to be modified
+*/
 $lang['js']['nosmblinks'] = '';
 ```
-
 
 ### Image Links
 
@@ -149,12 +148,12 @@ Resize to given width and height[^3]
 
 [^3]: when the aspect ratio of the given width and height doesn't match that of the image, it will be cropped to the new ratio before resizing: ![dokuwiki-128](wiki/dokuwiki-128.png?200x50)
 
-Resized external image:           ![php](https://secure.php.net/images/php.gif?200x50)
+Resized external image:           ![php](https://www.php.net/images/php.gif?200x50)
 
 Real size:                        ![dokuwiki-128](wiki/dokuwiki-128.png)
   Resize to given width:            ![dokuwiki-128](wiki/dokuwiki-128.png?50)
   Resize to given width and height: ![dokuwiki-128](wiki/dokuwiki-128.png?200x50)
-  Resized external image:           ![php](https://secure.php.net/images/php.gif?200x50)
+  Resized external image:           ![php](https://www.php.net/images/php.gif?200x50)
 
 By using left or right whitespaces you can choose the alignment.
 
@@ -181,6 +180,7 @@ For linking an image to another page see [#Image Links](#Image Links) above.
 DokuWiki can embed the following media formats directly.
 
 | Image | `gif`, `jpg`, `png`  |
+|  --- | --- |
 |  --- | --- |
 | Video | `webm`, `ogv`, `mp4` |
 | Audio | `ogg`, `mp3`, `wav`  |
@@ -212,7 +212,7 @@ Dokuwiki supports ordered and unordered lists. To create a list item, indent you
 
 * This is a list
 * The second item
-  * You may have different levels
+* You may have different levels
 * Another item
 
 1. The same list but ordered
@@ -221,17 +221,16 @@ Dokuwiki supports ordered and unordered lists. To create a list item, indent you
 4. That's it
 
 ```
-  * This is a list
-  * The second item
-    * You may have different levels
-  * Another item
+* This is a list
+* The second item
+  * You may have different levels
+* Another item
 
-  - The same list but ordered
-  - Another item
-    - Just use indention for deeper levels
-  - That's it
+1. The same list but ordered
+2. Another item
+  3. Just use indention for deeper levels
+4. That's it
 ```
-
 
 Also take a look at the [FAQ on list items](doku>faq:lists).
 
@@ -275,10 +274,9 @@ Typography: [DokuWiki](DokuWiki) can convert simple text characters to their typ
 "He thought 'It's a man's world'..."
 
 ```
--> <- <-> => <= <=> >> << -- --- 640x480 (c) (tm) (r)
+1.> <- <-> => <= <=> >> << -- --- 640x480 (c) (tm) (r)
 "He thought 'It's a man's world'..."
 ```
-
 
 The same can be done to produce any kind of HTML, it just needs to be added to the [pattern file](doku>entities).
 
@@ -302,7 +300,6 @@ I think we should do it
 >>> Then lets do it!
 ```
 
-
 I think we should do it
 
 > No we shouldn't
@@ -321,6 +318,7 @@ DokuWiki supports a simple syntax to create tables.
 
 | Heading 1      | Heading 2       | Heading 3          |
 |  --- | --- | --- |
+|  --- | --- | --- |
 | Row 1 Col 1    | Row 1 Col 2     | Row 1 Col 3        |
 | Row 2 Col 1    | some colspan (note the double pipe) | |
 | Row 3 Col 1    | Row 3 Col 2     | Row 3 Col 3        |
@@ -328,6 +326,7 @@ DokuWiki supports a simple syntax to create tables.
 Table rows have to start and end with a `|` for normal rows or a `^` for headers.
 
 | Heading 1      | Heading 2       | Heading 3          |
+|  --- | --- | --- |
 | Row 1 Col 1    | Row 1 Col 2     | Row 1 Col 3        |
 | Row 2 Col 1    | some colspan (note the double pipe) | |
 | Row 3 Col 1    | Row 3 Col 2     | Row 3 Col 3        |
@@ -338,6 +337,7 @@ Vertical tableheaders are possible, too.
 
 |              | Heading 1            | Heading 2          |
 |  --- | --- | --- |
+|  --- | --- | --- |
 | Heading 3    | Row 1 Col 2          | Row 1 Col 3        |
 | Heading 4    | no colspan this time |                    |
 | Heading 5    | Row 2 Col 2          | Row 2 Col 3        |
@@ -345,6 +345,7 @@ Vertical tableheaders are possible, too.
 As you can see, it's the cell separator before a cell which decides about the formatting:
 
 |              | Heading 1            | Heading 2          |
+|  --- | --- | --- |
 | Heading 3    | Row 1 Col 2          | Row 1 Col 3        |
 | Heading 4    | no colspan this time |                    |
 | Heading 5    | Row 2 Col 2          | Row 2 Col 3        |
@@ -353,6 +354,7 @@ You can have rowspans (vertically connected cells) by adding `%%:::%%` into the 
 
 | Heading 1      | Heading 2                  | Heading 3          |
 |  --- | --- | --- |
+|  --- | --- | --- |
 | Row 1 Col 1    | this cell spans vertically | Row 1 Col 3        |
 | Row 2 Col 1    |                         | Row 2 Col 3        |
 | Row 3 Col 1    |                         | Row 2 Col 3        |
@@ -360,13 +362,15 @@ You can have rowspans (vertically connected cells) by adding `%%:::%%` into the 
 Apart from the rowspan syntax those cells should not contain anything else.
 
 | Heading 1      | Heading 2                  | Heading 3          |
+|  --- | --- | --- |
 | Row 1 Col 1    | this cell spans vertically | Row 1 Col 3        |
 | Row 2 Col 1    |                         | Row 2 Col 3        |
 | Row 3 Col 1    |                         | Row 2 Col 3        |
 
 You can align the table contents, too. Just add at least two whitespaces at the opposite end of your text: Add two spaces on the left to align right, two spaces on the right to align left and two spaces at least at both ends for centered text.
 
-|           Table with alignment           | ||
+|           Table with alignment           | | |
+|  --- | --- | --- |
 |  --- | --- | --- |
 |         right|    center    |left          |
 |left          |         right|    center    |
@@ -374,7 +378,8 @@ You can align the table contents, too. Just add at least two whitespaces at the 
 
 This is how it looks in the source:
 
-|           Table with alignment           | ||
+|           Table with alignment           | | |
+|  --- | --- | --- |
 |         right|    center    |left          |
 |left          |         right|    center    |
 | xxxxxxxxxxxx | xxxxxxxxxxxx | xxxxxxxxxxxx |
@@ -400,7 +405,10 @@ The same is true for %%***this** text* with a smiley ;-)%%.
 You can include code blocks into your documents by either indenting them by at least two spaces (like used for the previous examples) or by using the tags ''%%
 
 ```
-%%'' or ''%%<file>%%''.
+%%` or `%%
+
+```
+%%''.
 
   This is text is indented by two spaces.
 
@@ -469,13 +477,12 @@ When you use the ''%%
 <file php myexample.php>
 <?php echo "hello world!"; ?>
 ```
+```
 
-</code>
 
 ```
 <?php echo "hello world!"; ?>
 ```
-
 
 If you don't want any highlighting but want a downloadable file, specify a dash (`-`) as the language code: `%%<code - myfile.foo>%%`.
 
@@ -484,6 +491,7 @@ If you don't want any highlighting but want a downloadable file, specify a dash 
 [DokuWiki](DokuWiki) can integrate data from external XML feeds. For parsing the XML feeds, [SimplePie](http://simplepie.org/) is used. All formats understood by SimplePie can be used in DokuWiki as well. You can influence the rendering by multiple additional space separated parameters:
 
 | Parameter  | Description |
+|  --- | --- |
 |  --- | --- |
 | any number | will be used as maximum number items to show, defaults to 8 |
 | reverse    | display the last items in the feed first |
@@ -508,6 +516,7 @@ By default the feed will be sorted by date, newest items first. You can sort it 
 Some syntax influences how DokuWiki renders a page without creating any output it self. The following control macros are availble:
 
 | Macro           | Description |
+|  --- | --- |
 |  --- | --- |
 | %%~~NOTOC~~%%   | If this macro is found on the page, no table of contents will be created |
 | %%~~NOCACHE~~%% | DokuWiki caches all output by default. Sometimes this might not be wanted (eg. when the %%<php>%% syntax above is used), adding this macro will force DokuWiki to rerender a page on every call |
